@@ -1,5 +1,33 @@
 import streamlit as st
 
+email_type = st.selectbox(
+    "Email Type",
+    [
+        "Leave Request",
+        "Job Application",
+        "Meeting Request",
+        "Follow Up",
+        "Resignation",
+        "General"
+    ]
+)
+
+tone = st.selectbox(
+    "Tone",
+    [
+        "Professional",
+        "Friendly",
+        "Formal",
+        "Confident"
+    ]
+)
+
+sender_name = st.text_input("Your Name")
+recipient = st.text_input("Recipient Name")
+purpose = st.text_area("Purpose")
+start_date = st.date_input("Start Date")
+end_date = st.date_input("End Date")
+
 from services.gemini_service import generate_email
 from prompts.email_prompt import build_email_prompt
 from utils.validators import validate_inputs
@@ -48,7 +76,7 @@ if st.button("Generate Email"):
                 mime="text/plain"
             )
 
-        except Exception:
-            st.error(
-                "Gemini service temporarily unavailable."
-            )
+
+        except Exception as e:
+
+            st.error(f"Error: {e}")

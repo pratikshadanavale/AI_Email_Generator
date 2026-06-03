@@ -13,7 +13,7 @@ client = genai.Client(
 def generate_email(prompt):
 
     response = client.models.generate_content(
-        model="gemini-1.5-flash",
+        model="gemini-2.5-flash",
         contents=prompt
     )
 
